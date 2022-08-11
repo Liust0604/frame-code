@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mori.demo.mapper.AccountMapper">
+
+    <!--定义封装从表account和主表user的resultMap-->
+    <resultMap id="accountUserMap" type="account">
+        <!--account内容-->
+        <id property="id" column="aid"></id> <!--因为两表的两个id重复,所以sql中起了别名-->
+        <result property="uid" column="uid"></result>
+        <result property="money" column="money"></result>
+        <!--user(关联)内容，看作一对一-->
+        <!--新增关联属性名、关联外键、封装成的java类型-->
+        <association property="user" column="uid" javaType="user">
+            <id property="id" column="id"></id>
+            <result property="username" column="username"></result>
+            <result property="sex" column="sex"></result>
+            <result property="address" column="address"></result>
+            <result property="birthday" column="birthday"></result>
+        </association>
+    </resultMap>
+
+    <!--查一情况下,association延迟加载-->
+    <resultMap id="accountUserLazyMap" type="account">
+        <!--account内容-->
+        <id property="id" column="aid"></id> <!--因为两表的两个id重复,所以sql中起了别名-->
+        <result property="uid" column="uid"></result>
+        <result property="money" column="money"></result>
+        <!--user(关联)内容，看作一对一-->
+        <!--select：查询用户唯一标识，注意查询结果和用户实体类属性一致-->
+        <!--相当于，accountUserMap里，直接根据column关联外键，通过sql关联查询用户数据，
+            accountUserLazyMap里，使用到用户数据的时候，column关联外键是uid，传入select的findById方法，查询用户表的对应uid的记录-->
+        <association property="user" column="uid" javaType="user"
+                     select="com.mori.demo.mapper.UserMapper.findById"></association>
+    </resultMap>
+
+    <!--查询所有账户-->
+    <select id="findAll" resultType="com.mori.demo.domain.Account">
+        select * from eesy_mybatis.account ;
+    </select>
+
+    <!--查询所有账户,关联用户-->
+    <select id="findAllWithUser" resultMap="accountUserMap">
+        select
+            a.id as aid,
+            a.uid,
+            a.money,
+            u.*
+        from
+            eesy_mybatis.account a,
+            eesy_mybatis.user u
+        where
+            u.id = a.uid;
+    </select>
+
+
+    <!--查询所有账户,关联用户(延迟加载)-->
+    <select id="findAllWithUserLazy" resultMap="accountUserLazyMap">
+        select
+            a.id as aid,
+            a.uid,
+            a.money
+        from
+            eesy_mybatis.account a
+    </select>
+
+    <!--根据用户id，查询账户列表，即查询该用户拥有的所有账户-->
+    <select id="findByUid" resultType="account">
+        select * from eesy_mybatis.account where uid = #{accountId};
+    </select>
+
+</mapper>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration  PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--mybatis的主配置文件-->
+<!--1、mybatis约束-->
+<configuration>
+
+    <!--配置properties-->
+    <!--1、可以标签内定义属性-->
+    <!--2、也可以引用外部配置文件信息。resource属性：指定配置文件路径，类路径，且必须存在于类路径下-->
+    <properties resource="jdbcConfig.properties">
+        <!--<property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/eesy_mybatis"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>-->
+    </properties>
+
+    <!--配置settings,标签的顺序，必须位于properties之后typeAliases之前-->
+    <settings>
+        <!--实现延迟加载(懒加载)-->
+        <!--开启mybatis全局支持延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--调用方法时，具有懒加载特性的对象，会按需加载懒加载属性，高版本默认false可不加-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!--开启全局Mybatis二级缓存，默认值为true可不配-->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <!--配置domain中类的别名-->
+    <!--这也是就为什么默认在mapper.xml中基本类型写成int/Integer…都可以识别出来-->
+    <typeAliases>
+        <!--type:实体类全限定类名 alias：别名-->
+        <!--指定的别名不区分大小写-->
+        <!--<typeAlias type="com.mori.demo.domain.User" alias="user"></typeAlias>-->
+        <!--指定要配置别名的包，该包下所有实体类都会注册别名，且类名就是别名，不区分大小写-->
+        <package name="com.mori.demo.domain"/>
+    </typeAliases>
+
+    <!--配置环境-->
+    <environments default="mysql">
+        <!--2、配置mysql的环境-->
+        <environment id="mysql">
+            <!--配置事务类型，指定为JDBC-->
+            <transactionManager type="JDBC"></transactionManager>
+            <!--3、配置数据源（连接池）-->
+            <!--POOLED：传统javax.sql.DataSource规范中的连接池,mybatis中有针对规范的实现-->
+            <!--UNPOOLED：传统获取连接方式,虽然也实现DataSource接口，但没有使用池的思想-->
+            <!--JNDI：通过服务器提供的JNDI技术实现。获取DataSource对象，不同服务器拿到的DataSource不同
+                只有web或maven的war工程才能使用。
+                如tomcat，采用的就是dbcp连接池
+            -->
+            <dataSource type="POOLED">
+                <!--配置连接数据库的4个基本信息-->
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--4、映射配置-->
+    <mappers>
+        <!--1、使用映射配置文件，指定每个dao在resources的独立的配置文件mapper.xml
+             配置mapper.xml -> mapper.xml 指定命名空间 -> 映射select标签里的sql
+        -->
+        <!--<mapper resource="com\mori\demo\mapper\UserMapper.xml"/>-->
+        <!--2、使用注解，指定dao接口的全类名。
+             配置命名空间 -> 映射类里的@Select注解里的sql -->
+        <!--<mapper class="com.mori.demo.mapper.UserMapper"/>-->
+        <!--直接指定dao接口所在的包，指定后就不用再写mapper标签了-->
+        <package name="com.mori.demo.mapper"/>
+    </mappers>
+</configuration>

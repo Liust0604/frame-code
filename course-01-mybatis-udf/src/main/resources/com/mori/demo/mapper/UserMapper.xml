@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="com.mori.demo.mapper.UserMapper">
+    <select id="findAll" resultType="com.mori.demo.domain.User">
+        select * from eesy_mybatis.user ;
+    </select>
+</mapper>

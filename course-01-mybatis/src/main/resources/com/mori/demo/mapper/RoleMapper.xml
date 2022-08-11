@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mori.demo.mapper.RoleMapper">
+
+    <!--定义封装从表account和主表user的resultMap-->
+    <resultMap id="roleUserMap" type="role">
+        <id property="id" column="role_id"></id>
+        <result property="roleName" column="role_name"></result>
+        <result property="roleDesc" column="role_desc"></result>
+        <collection property="users" ofType="user">
+            <id property="id" column="id"></id>
+            <result property="username" column="username"></result>
+            <result property="sex" column="sex"></result>
+            <result property="address" column="address"></result>
+            <result property="birthday" column="birthday"></result>
+        </collection>
+    </resultMap>
+
+    <!--查询所有账户-->
+    <select id="findAll" resultType="com.mori.demo.domain.Account">
+        select * from eesy_mybatis.role ;
+    </select>
+
+    <!--查询所有账户,关联用户(多对多，需要中间表)-->
+    <select id="findAllWithUser" resultMap="roleUserMap">
+        select
+            r.id as role_id,
+            r.ROLE_NAME as role_name,
+            r.ROLE_NAME as role_desc,
+            u.*
+        from
+            eesy_mybatis.role r
+        left join eesy_mybatis.user_role t on
+            r.id = t.rid
+        left join eesy_mybatis.user u on
+            t.uid = u.id
+    </select>
+
+</mapper>
