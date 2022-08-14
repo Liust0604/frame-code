@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--IOC 控制反转-->
+    <!--把对象的创建交给spring来管理。创建对象，并存入spring核心容器-->
+    <bean id="accountDao" class="com.mori.dao.impl.AccountDaoImpl"></bean>
+
+    <!--创建bean的三种方式-->
+    <!--1、使用默认(无参)构造方法创建对象。即bean标签，且仅有id和class属性。若该类没有默认构造方法时，会报错-->
+    <!--<bean id="accountService" class="com.mori.service.impl.AccountServiceImpl"></bean>-->
+    <!--2、可以使用普通工厂中的方法创建(即使用某个类的方法创建)。【比如在jar包中无法直接修改源码创建构造方法的情况下】-->
+    <!--<bean id="instanceFactory" class="com.mori.factory.InstanceFactory"></bean>-->
+    <!--<bean id="accountService" factory-bean="instanceFactory" factory-method="getAccountService"></bean>-->
+    <!--3、可以使用普通工厂中的静态方法创建(即使用某个类的静态方法创建)。必须是静态方法-->
+    <!--<bean id="accountService" class="com.mori.factory.InstanceFactory" factory-method="getAccountServiceStatic"></bean>-->
+
+    <!--bean的作用范围-->
+    <!--bean标签的scope属性，用于指定bean的作用范围。常用单例的和多例的。
+        singleton：单例（默认值）
+        prototype：多例
+        request：作用于web应用的请求范围
+        session：作用于web应用的会话范围
+        global-session：作用于集群环境的会话范围(全局会话范围)，当不是集群环境时，它就是session
+    -->
+    <!--<bean id="accountService" class="com.mori.service.impl.AccountServiceImpl" scope="singleton"></bean>-->
+
+    <!--bean的生命周期-->
+    <!--
+       单例对象（生命周期和容器相同）
+            初始化：容器创建时
+            活着：容器存在
+            死亡：容器销毁
+       多例对象
+            初始化：使用对象时，spring框架来创建
+            活着：对象存在
+            死亡：对象长时间不用时，用jvm垃圾回收机制销毁
+    -->
+    <!--<bean id="accountService" class="com.mori.service.impl.AccountServiceImpl"
+          scope="singleton" init-method="init" destroy-method="destory"></bean>-->
+
+
+    <!--DI 依赖注入-->
+    <!--  constructor-arg标签：给构造函数参数赋值，通过构造函数注入属性
+            指定构造函数参数属性：
+                type：构造函数中参数某个或某些参数的类型
+                index：构造函数中某个参数的索引
+                name：构造函数中参数名（常用）
+            赋值属性：
+                value：要注入属性的值，基本数据类型或String。会自动类型转换
+                ref：要注入属性的值，其他bean类型（被spring的ioc核心容器管理的bean对象）
+          优点：创建对象时，必须注入数据
+          缺点：创建对象时，如果用不到这些数据，也必须提供
+    -->
+    <!--<bean id="accountService" class="com.mori.service.impl.AccountServiceImpl">
+        <constructor-arg name="name" value="测试"></constructor-arg>
+        <constructor-arg name="age" value="18"></constructor-arg>
+        <constructor-arg name="birthday" ref="now"></constructor-arg>
+    </bean>-->
+
+    <!--配置一个日期对象-->
+    <bean id="now" class="java.util.Date"></bean>
+
+    <!--  property标签：给set方法参数赋值，通过set方法注入属性
+                name：set方法名去掉set并小写
+                value：基本数据类型或String的值
+                ref：bean对象的值
+          优点：创建对象时，可以直接使用默认构造函数，任意设置数据
+          缺点：无法保证对必须有值的数据执行set方法
+    -->
+    <bean id="accountService" class="com.mori.service.impl.AccountServiceImpl">
+        <property name="name" value="test"></property>
+        <property name="age" value="21"></property>
+        <property name="birthday" ref="now"></property>
+        <!--集合类型-->
+        <!--单列集合标签可互换，双列集合标签可互换-->
+        <property name="myArr">
+            <array>
+                <value>111</value>
+                <value>AAA</value>
+            </array>
+        </property>
+        <property name="myList">
+            <list>
+                <value>111</value>
+                <value>AAA</value>
+            </list>
+        </property>
+        <property name="mySet">
+            <set>
+                <value>111</value>
+                <value>AAA</value>
+            </set>
+        </property>
+        <property name="myMap">
+            <map>
+                <entry key="A" value="aaa"></entry>
+                <entry key="B">
+                    <value>bbb</value>
+                </entry>
+            </map>
+        </property>
+        <property name="myProps">
+            <props>
+                <prop key="C">ccc</prop>
+                <prop key="D">ddd</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>
