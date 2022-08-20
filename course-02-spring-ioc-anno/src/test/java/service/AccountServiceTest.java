@@ -37,7 +37,7 @@ public class AccountServiceTest {
     @Test
     public void testSaveAccount() {
         Account account = new Account();
-        account.setMoney(500f);
+        account.setBalance(500f);
         account.setName("xixi");
         accountService.saveAccount(account);
     }
@@ -46,7 +46,7 @@ public class AccountServiceTest {
     public void testUpdateAccount() {
         Account account = new Account();
         account.setId(7);
-        account.setMoney(600f);
+        account.setBalance(600f);
         account.setName("xiaoxi"); // 不填的话为null,因为没有动态加载查询条件
         accountService.updateAccount(account);
     }

@@ -46,7 +46,7 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public void saveAccount(Account account) {
         try {
-            runner.update("insert into db2.account(name,balance) values (?,?)", account.getName(), account.getMoney());
+            runner.update("insert into db2.account(name,balance) values (?,?)", account.getName(), account.getBalance());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -55,7 +55,7 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public void updateAccount(Account account) {
         try {
-            runner.update("update db2.account set name=?, balance=? where id=?", account.getName(), account.getMoney(), account.getId());
+            runner.update("update db2.account set name=?, balance=? where id=?", account.getName(), account.getBalance(), account.getId());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
