@@ -16,18 +16,17 @@
         <property name="password" value="root"></property>
     </bean>
 
+    <!--ConnectionUtils-->
+    <bean id="connectionUtils" class="com.mori.utils.ConnectionUtils">
+        <!--注入数据源-->
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
     <!--注入QueryRunner-->
     <bean id="runner" class="org.apache.commons.dbutils.QueryRunner" scope="prototype">
         <!--不是直接在QueryRunner中注入数据源，
             而是改为在connectionUtils注入数据源，再通过connectionUtils获取数据库连接，每个dao方法单独获取当前线程的数据库连接-->
         <!-- <constructor-arg name="ds" ref="dataSource"></constructor-arg>-->
-    </bean>
-
-    <!--AccountServiceImpl-->
-    <bean id="accountService" class="com.mori.service.impl.AccountServiceImpl">
-        <property name="accountDao" ref="accountDao"></property>
-        <!--注入TransactionManager-->
-        <property name="txManager" ref="txManager"></property>
     </bean>
 
     <!--AccountDaoImpl-->
@@ -37,17 +36,27 @@
         <property name="connectionUtils" ref="connectionUtils"></property>
     </bean>
 
+    <!--AccountServiceImpl-->
+    <bean id="accountService" class="com.mori.service.impl.AccountServiceImpl">
+        <property name="accountDao" ref="accountDao"></property>
+    </bean>
+
     <!--TransactionManager-->
     <bean id="txManager" class="com.mori.utils.TransactionManager">
         <!--注入ConnectionUtils-->
         <property name="connectionUtils" ref="connectionUtils"></property>
     </bean>
 
-    <!--ConnectionUtils-->
-    <bean id="connectionUtils" class="com.mori.utils.ConnectionUtils">
-        <!--注入数据源-->
-        <property name="dataSource" ref="dataSource"></property>
+    <!--BeanFactory-->
+    <bean id="beanFactory" class="com.mori.factory.BeanFactory">
+        <!--注入AccountServiceImpl-->
+        <property name="accountService" ref="accountService"></property>
+        <!--注入TransactionManager-->
+        <property name="txManager" ref="txManager"></property>
     </bean>
+
+    <!--代理的AccountServiceImpl-->
+    <bean id="accountServiceProxy" factory-bean="beanFactory" factory-method="getAccountService"></bean>
 
 
 </beans>
