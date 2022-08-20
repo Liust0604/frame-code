@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mori</groupId>
-    <artifactId>course-02-spring-aop-ex</artifactId>
+    <artifactId>course-02-spring-aop-ex-TxProxy</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -50,6 +50,13 @@
             <groupId>commons-dbutils</groupId>
             <artifactId>commons-dbutils</artifactId>
             <version>1.7</version>
+        </dependency>
+
+        <!--基于子类的动态代理需要的包-->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.1</version>
         </dependency>
 
     </dependencies>
