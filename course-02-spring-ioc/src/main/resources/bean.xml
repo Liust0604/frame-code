@@ -4,9 +4,26 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="jdbcUrl"
+                  value="jdbc:mysql://localhost:3306/db2?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT%2B8&amp;useSSL=false"></property>
+        <property name="user" value="root"></property>
+        <property name="password" value="root"></property>
+    </bean>
+
+    <!--配置QueryRunner，多个dao对象都在用QueryRunner，所以最好用多例-->
+    <bean id="runner" class="org.apache.commons.dbutils.QueryRunner" scope="prototype">
+        <!--注入数据源-->
+        <constructor-arg name="ds" ref="dataSource"></constructor-arg>
+    </bean>
+
     <!--IOC 控制反转-->
     <!--把对象的创建交给spring来管理。创建对象，并存入spring核心容器-->
-    <bean id="accountDao" class="com.mori.dao.impl.AccountDaoImpl"></bean>
+    <bean id="accountDao" class="com.mori.dao.impl.AccountDaoImpl">
+        <!--注入QueryRunner-->
+        <property name="runner" ref="runner"></property>
+    </bean>
 
     <!--创建bean的三种方式-->
     <!--1、使用默认(无参)构造方法创建对象。即bean标签，且仅有id和class属性。若该类没有默认构造方法时，会报错-->
@@ -71,6 +88,9 @@
           缺点：无法保证对必须有值的数据执行set方法
     -->
     <bean id="accountService" class="com.mori.service.impl.AccountServiceImpl">
+        <!--注入dao-->
+        <property name="accountDao" ref="accountDao"></property>
+        <!--注入属性-->
         <property name="name" value="test"></property>
         <property name="age" value="21"></property>
         <property name="birthday" ref="now"></property>

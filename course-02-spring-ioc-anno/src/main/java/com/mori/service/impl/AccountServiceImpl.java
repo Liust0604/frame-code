@@ -3,6 +3,7 @@ package com.mori.service.impl;
 
 import com.mori.dao.AccountDao;
 import com.mori.dao.impl.AccountDaoImpl;
+import com.mori.domain.Account;
 import com.mori.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -66,6 +67,32 @@ public class AccountServiceImpl implements AccountService {
     public void saveAccount() {
         System.err.println("AccountService的saveAccount方法执行了……  " + name + " , " + age + " , " + birthday);
         accountDao.saveAccount();
+    }
+
+    /*案例*/
+    @Override
+    public List<Account> findAllAccount() {
+        return accountDao.findAllAccount();
+    }
+
+    @Override
+    public Account findAccountById(Integer accountId) {
+        return accountDao.findAccountById(accountId);
+    }
+
+    @Override
+    public void saveAccount(Account account) {
+        accountDao.saveAccount(account);
+    }
+
+    @Override
+    public void updateAccount(Account account) {
+        accountDao.updateAccount(account);
+    }
+
+    @Override
+    public void deleteAccount(Integer accountId) {
+        accountDao.deleteAccount(accountId);
     }
 
 }
