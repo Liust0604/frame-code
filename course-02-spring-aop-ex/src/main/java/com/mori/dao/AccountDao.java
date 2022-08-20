@@ -16,5 +16,11 @@ public interface AccountDao {
 
     void deleteAccount(Integer accountId);
 
-
+    /**
+     * 根据名称查询账户
+     *
+     * @param accountName
+     * @return 唯一一个结果返回，没有结果返回null，结果集超过一个抛异常
+     */
+    Account findAccountByName(String accountName);
 }

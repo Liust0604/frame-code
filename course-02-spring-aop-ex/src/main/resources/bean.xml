@@ -18,17 +18,36 @@
 
     <!--注入QueryRunner-->
     <bean id="runner" class="org.apache.commons.dbutils.QueryRunner" scope="prototype">
-        <constructor-arg name="ds" ref="dataSource"></constructor-arg>
-    </bean>
-
-    <!--AccountDaoImpl-->
-    <bean id="accountDao" class="com.mori.dao.impl.AccountDaoImpl">
-        <property name="runner" ref="runner"></property>
+        <!--不是直接在QueryRunner中注入数据源，
+            而是改为在connectionUtils注入数据源，再通过connectionUtils获取数据库连接，每个dao方法单独获取当前线程的数据库连接-->
+        <!-- <constructor-arg name="ds" ref="dataSource"></constructor-arg>-->
     </bean>
 
     <!--AccountServiceImpl-->
     <bean id="accountService" class="com.mori.service.impl.AccountServiceImpl">
         <property name="accountDao" ref="accountDao"></property>
+        <!--注入TransactionManager-->
+        <property name="txManager" ref="txManager"></property>
     </bean>
+
+    <!--AccountDaoImpl-->
+    <bean id="accountDao" class="com.mori.dao.impl.AccountDaoImpl">
+        <property name="runner" ref="runner"></property>
+        <!--注入ConnectionUtils-->
+        <property name="connectionUtils" ref="connectionUtils"></property>
+    </bean>
+
+    <!--TransactionManager-->
+    <bean id="txManager" class="com.mori.utils.TransactionManager">
+        <!--注入ConnectionUtils-->
+        <property name="connectionUtils" ref="connectionUtils"></property>
+    </bean>
+
+    <!--ConnectionUtils-->
+    <bean id="connectionUtils" class="com.mori.utils.ConnectionUtils">
+        <!--注入数据源-->
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
 
 </beans>
