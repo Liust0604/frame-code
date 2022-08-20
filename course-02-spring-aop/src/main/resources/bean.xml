@@ -24,8 +24,8 @@
             <!--aop:before：前置通知-->
             <!--method：指定通知方法，pointcut:指定切入点表达式，对业务层中哪些方法增强-->
             <!--含义为，配置了一个切面，这个切面的通知类为logger，通知类的printLog通知，作为saveAccount切入点的前置通知-->
-            <aop:before method="printLog"
-                        pointcut="execution(public void com.mori.service.impl.AccountServiceImpl.saveAccount())"></aop:before>
+            <aop:before method="beforePrintLog"
+                        pointcut="execution(* com.mori.service.impl.*.*(..))"></aop:before>
         </aop:aspect>
     </aop:config>
 

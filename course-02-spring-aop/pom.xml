@@ -24,7 +24,7 @@
             <version>5.1.9.RELEASE</version>
         </dependency>
 
-        <!--aspectj-->
+        <!--aspectj，解析切入点表达式-->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>

@@ -24,9 +24,11 @@ public class AccountServiceTest {
 
     @Test
     public void testUpdateAccount() {
+        accountService.updateAccount(1);
     }
 
     @Test
     public void testDeleteAccount() {
+        int i = accountService.deleteAccount(1);
     }
 }

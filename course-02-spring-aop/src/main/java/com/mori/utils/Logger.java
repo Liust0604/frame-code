@@ -1,15 +1,36 @@
 package com.mori.utils;
 
 /**
+ * 【通知类】
  * 用于记录日志的工具类
  */
 public class Logger {
 
     /**
-     * 打印日志
-     * 计划在切入点方法执行之前执行（切入点方法就是业务层方法）
+     * 前置通知
      */
-    public void printLog() {
-        System.out.println("Logger类printLog方法开始记录日志了……");
+    public void beforePrintLog() {
+        System.out.println("前置通知：Logger类beforePrintLog方法开始记录日志了……");
+    }
+
+    /**
+     * 后置通知
+     */
+    public void afterReturningPrintLog() {
+        System.out.println("后置通知：Logger类afterPrintLog方法开始记录日志了……");
+    }
+
+    /**
+     * 异常通知
+     */
+    public void afterThrowingPrintLog() {
+        System.out.println("异常通知：Logger类afterThrowingPrintLog方法开始记录日志了……");
+    }
+
+    /**
+     * 最终通知
+     */
+    public void afterPrintLog() {
+        System.out.println("最终通知：Logger类afterPrintLog方法开始记录日志了……");
     }
 }
