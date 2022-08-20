@@ -17,6 +17,14 @@
             <version>5.1.5.RELEASE</version>
         </dependency>
 
+        <!--spring框架：整合Junit-->
+        <!--使用 spring 5.x ，要求 junit 4.12 及以上-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.1.9.RELEASE</version>
+        </dependency>
+
         <!--其他-->
         <dependency>
             <groupId>junit</groupId>
