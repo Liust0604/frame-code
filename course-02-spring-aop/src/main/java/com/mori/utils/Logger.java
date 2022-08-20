@@ -33,4 +33,5 @@ public class Logger {
     public void afterPrintLog() {
         System.out.println("最终通知：Logger类afterPrintLog方法开始记录日志了……");
     }
+
 }
