@@ -17,6 +17,7 @@ public class AccountServiceImpl implements AccountService {
 
     private AccountDao accountDao;
 
+    //set方式注入AccountDao
     public void setAccountDao(AccountDao accountDao) {
         this.accountDao = accountDao;
     }
