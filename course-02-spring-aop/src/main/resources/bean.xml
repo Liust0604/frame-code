@@ -19,6 +19,7 @@
     <aop:config>
         <!--3、aop:aspect标签配置切面(切入点+通知)-->
         <!--id：给切面提供唯一标志；ref：指定通知类bean的id-->
+        <aop:pointcut id="pt1" expression="execution(* com.mori.service.impl.*.*(..))"/>
         <aop:aspect id="logAdvice" ref="logger">
             <!--4、aop:aspect标签内部，配置通知类型，并建立通知方法和切入点方法之间的关联-->
             <!--aop:before：前置通知-->
@@ -36,8 +37,7 @@
             <!-- <aop:after method="afterPrintLog"
                         pointcut="execution(* com.mori.service.impl.*.*(..))"></aop:after>-->
             <!--环绕通知-->
-            <aop:around method="aroundPrintLog"
-                        pointcut="execution(* com.mori.service.impl.*.*(..))"></aop:around>
+            <aop:around method="aroundPrintLog" pointcut-ref="pt1"></aop:around>
         </aop:aspect>
     </aop:config>
 
