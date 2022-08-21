@@ -2,13 +2,14 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <bean id="accountService" class="com.mori.service.impl.AccountServiceImpl">
         <!--注入accountDao-->
@@ -27,5 +28,39 @@
         <property name="username" value="root"></property>
         <property name="password" value="root"></property>
     </bean>
+
+    <!--spring中基于XML的声明式事务控制-->
+    <!--1、导入事务约束：aop和tx-->
+    <!--2、配置spring提供的事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!--3、tx:advice标签，配置 事务通知
+        id：给事务通知起一个唯一标识 transaction-manager：给事务通知提供一个事务管理器引用-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <!--5、配置事务的属性-->
+        <tx:attributes>
+            <!--对transfer这个方法的事务配置一些属性
+                isolation=""  事务隔离级别。默认DEFAULT，表示使用数据库的隔离级别。
+                propagation="" 事务传播行为，默认REQUIRED，表示一定会有事务(增删改)。SUPPORTS，表示没有事务，就以非事务方式执行(查)
+                read-only="" 事务是否只读，默认false，表示读写。只有查询才能设为true
+                timeout="" 事务超时时间，默认-1，表示永不超时。数值以秒为单位
+                rollback-for="" 用于指定一个回滚异常，产生其他异常不回滚。没有默认值，表示任何异常都回滚
+                no-rollback-for="" 用于指定一个不回滚异常，产生其他异常时回滚。没有默认值，表示任何异常都回滚
+            -->
+            <!--所有findXXX查询方法，不启用事务；其他所有方法启用事务-->
+            <tx:method name="*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--4、配置aop-->
+    <aop:config>
+        <!--配置切入点表达式-->
+        <aop:pointcut id="pt1" expression="execution(* com.mori.service.impl.*.*(..))"/>
+        <!--aop:advisor 标签，建立切入点表达式和事务通知之间的关系-->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt1"></aop:advisor>
+    </aop:config>
 
 </beans>
