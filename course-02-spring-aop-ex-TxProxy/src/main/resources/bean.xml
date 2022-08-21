@@ -30,7 +30,7 @@
     </bean>
 
     <!--AccountDaoImpl-->
-    <bean id="accountDao" class="com.mori.dao.impl.AccountDaoImpl">
+    <bean id="accountDao" class="com.mori.AccountDaoImpl">
         <property name="runner" ref="runner"></property>
         <!--注入ConnectionUtils-->
         <property name="connectionUtils" ref="connectionUtils"></property>

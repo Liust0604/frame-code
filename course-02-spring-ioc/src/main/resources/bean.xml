@@ -20,7 +20,7 @@
 
     <!--IOC 控制反转-->
     <!--把对象的创建交给spring来管理。创建对象，并存入spring核心容器-->
-    <bean id="accountDao" class="com.mori.dao.impl.AccountDaoImpl">
+    <bean id="accountDao" class="com.mori.AccountDaoImpl">
         <!--注入QueryRunner-->
         <property name="runner" ref="runner"></property>
     </bean>

@@ -19,7 +19,7 @@
     </resultMap>
 
     <!--查询所有账户-->
-    <select id="findAll" resultType="com.mori.demo.domain.Account">
+    <select id="findAll" resultType="com.mori.demo.Account">
         select * from eesy_mybatis.role ;
     </select>
 
