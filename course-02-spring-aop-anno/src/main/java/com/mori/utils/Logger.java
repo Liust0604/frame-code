@@ -1,7 +1,9 @@
 package com.mori.utils;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component("logger")
 @Aspect //表示当前类是一个切面类
+//@EnableAspectJAutoProxy //主配置类上开启AOP注解
 public class Logger {
 
     //指定切入点表达式
