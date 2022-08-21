@@ -24,17 +24,20 @@
             <!--aop:before：前置通知-->
             <!--method：指定通知方法，pointcut:指定切入点表达式，对业务层中哪些方法增强-->
             <!--含义为，配置了一个切面，这个切面的通知类为logger，通知类的printLog通知，作为saveAccount切入点的前置通知-->
-            <aop:before method="beforePrintLog"
-                        pointcut="execution(* com.mori.service.impl.*.*(..))"></aop:before>
+            <!-- <aop:before method="beforePrintLog"
+                         pointcut="execution(* com.mori.service.impl.*.*(..))"></aop:before>-->
             <!--后置通知-->
-            <aop:after-returning method="afterReturningPrintLog"
-                                 pointcut="execution(* com.mori.service.impl.*.*(..))"></aop:after-returning>
+            <!--<aop:after-returning method="afterReturningPrintLog"
+                                 pointcut="execution(* com.mori.service.impl.*.*(..))"></aop:after-returning>-->
             <!--异常通知-->
-            <aop:after-throwing method="afterThrowingPrintLog"
-                                pointcut="execution(* com.mori.service.impl.*.*(..))"></aop:after-throwing>
+            <!--<aop:after-throwing method="afterThrowingPrintLog"
+                                pointcut="execution(* com.mori.service.impl.*.*(..))"></aop:after-throwing>-->
             <!--最终通知-->
-            <aop:after method="afterPrintLog"
-                       pointcut="execution(* com.mori.service.impl.*.*(..))"></aop:after>
+            <!-- <aop:after method="afterPrintLog"
+                        pointcut="execution(* com.mori.service.impl.*.*(..))"></aop:after>-->
+            <!--环绕通知-->
+            <aop:around method="aroundPrintLog"
+                        pointcut="execution(* com.mori.service.impl.*.*(..))"></aop:around>
         </aop:aspect>
     </aop:config>
 
