@@ -2,19 +2,25 @@ package com.mori.dao.impl;
 
 import com.mori.dao.AccountDao;
 import com.mori.domain.Account;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * @author LiuShitian
  */
-public class AccountDaoImpl extends JdbcDaoSupport implements AccountDao {
+@Repository("accountDao")
+public class AccountDaoImpl implements AccountDao {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public Account findAccountById(Integer accoutId) {
-        List<Account> accounts = super.getJdbcTemplate().query("select * from db2.account where id = ?", new BeanPropertyRowMapper<>(Account.class), accoutId);
+        List<Account> accounts = jdbcTemplate.query("select * from db2.account where id = ?", new BeanPropertyRowMapper<>(Account.class), accoutId);
         if (accounts.isEmpty()) {
             return null;
         }
@@ -23,7 +29,7 @@ public class AccountDaoImpl extends JdbcDaoSupport implements AccountDao {
 
     @Override
     public Account findAccountByName(String accoutName) {
-        List<Account> accounts = super.getJdbcTemplate().query("select * from db2.account where name = ?", new BeanPropertyRowMapper<>(Account.class), accoutName);
+        List<Account> accounts = jdbcTemplate.query("select * from db2.account where name = ?", new BeanPropertyRowMapper<>(Account.class), accoutName);
         if (accounts.isEmpty()) {
             return null;
         }
@@ -35,6 +41,6 @@ public class AccountDaoImpl extends JdbcDaoSupport implements AccountDao {
 
     @Override
     public void updateAccount(Account accout) {
-        int count = super.getJdbcTemplate().update("update db2.account set name=? , balance=? where id=?", accout.getName(), accout.getBalance(), accout.getId());
+        int count = jdbcTemplate.update("update db2.account set name=? , balance=? where id=?", accout.getName(), accout.getBalance(), accout.getId());
     }
 }

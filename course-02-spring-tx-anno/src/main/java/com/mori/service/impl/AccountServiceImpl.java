@@ -3,17 +3,20 @@ package com.mori.service.impl;
 import com.mori.dao.AccountDao;
 import com.mori.domain.Account;
 import com.mori.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author LiuShitian
  */
+@Service("accountService")
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true) //只读型事务（不开启事务）
 public class AccountServiceImpl implements AccountService {
 
+    @Autowired
     AccountDao accountDao;
-
-    public void setAccountDao(AccountDao accountDao) {
-        this.accountDao = accountDao;
-    }
 
     @Override
     public Account findAccountById(Integer accountId) {
@@ -21,6 +24,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     //转账
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false) //单独开启事务
     @Override
     public void transfer(String sourceName, String targetName, Float balance) {
         System.out.println("转账开始…");
