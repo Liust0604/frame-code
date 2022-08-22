@@ -1,11 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
-        <title>Title</title>
+        <title>成功页面</title>
     </head>
     <body>
-        <h3>入门程序</h3>
-        <%--相对路径--%>
-        <a href="hello">入门</a>
+        <h3>成功！</h3>
     </body>
 </html>

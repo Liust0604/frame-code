@@ -10,6 +10,13 @@
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--初始化前端控制器DispatcherServlet这个类的时候，加载spring配置文件，这样才能开启spring的包扫描-->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:springmvc.xml</param-value>
+        </init-param>
+        <!--该Servlet服务器启动时创建-->
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <!--/表示任何请求都会经过Spring提供的这个dispatcherServlet前端控制器-->
     <servlet-mapping>
