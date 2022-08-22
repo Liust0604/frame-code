@@ -6,6 +6,6 @@
     <body>
         <h3>入门程序</h3>
         <%--相对路径--%>
-        <a href="hello">入门</a>
+        <a href="user/hello?username=aaa">入门</a>
     </body>
 </html>
