@@ -14,7 +14,8 @@
     <context:component-scan base-package="com.mori"></context:component-scan>
 
     <!--开启SpringMVC框架注解的支持-->
-    <mvc:annotation-driven/>
+    <!--conversion-service开启类型转换服务-->
+    <mvc:annotation-driven conversion-service="conversionService"/>
 
     <!--配置视图解析器-->
     <bean id="internalResourceViewResolver"
@@ -23,6 +24,17 @@
         <property name="prefix" value="/WEB-INF/pages/"/>
         <!--后缀，文件后缀名-->
         <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--配置自定义类型转换器-->
+    <bean id="conversionService"
+          class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <!--将自定义类型转换类加入springMVC提供的转换服务中-->
+                <bean class="com.mori.utils.StringToDateConverter"/>
+            </set>
+        </property>
     </bean>
 
 </beans>
