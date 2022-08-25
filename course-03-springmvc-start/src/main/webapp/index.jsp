@@ -8,6 +8,7 @@
         <%--相对路径--%>
         <a href="user/hello?username=aaa">入门</a>
         <hr/>
+        <h3>参数赋值</h3>
         <%--通过反射传入方法参数--%>
         <a href="param?username=aaa&password=123">参数</a>
         <br>
@@ -33,5 +34,31 @@
         <hr/>
         <%--测试原生ServletAPI--%>
         <a href="servletAPI?username=aaa&password=123">ServletAPI</a>
+        <hr/>
+        <h3>常用注解</h3>
+        <a href="anno/testRequestParam?username=小明&password=123">@RequestParam</a>
+        <br>
+        <hr/>
+        <a href="anno/testRequestHeader?username=小明&password=123">@RequestHeader</a>
+        <br>
+        <form action="anno/testRequestBody" method="post">
+            姓名: <input type="text" name="username" value="aaa"><br/>
+            密码: <input type="text" name="password" value="123"><br/>
+            金额: <input type="text" name="balance" value="22.5"><br/>
+            <input type="submit" value="@RequestBody">
+        </form>
+        <hr/>
+        <a href="anno/testPathVariable/10">@PathVariable</a><br/>
+        <a href="anno/testCookieValue">@CookieValue</a><br/>
+        <a href="anno/testSessionAttributes">@SessionAttributes</a><br/>
+        <a href="anno/getSessionAttributes">getSessionAttributes</a><br/>
+        <a href="anno/delSessionAttributes">delSessionAttributes</a><br/>
+        <hr/>
+        <form action="anno/testModelAttributeFun" method="post">
+            姓名: <input type="text" name="username" value="aaa"><br/>
+            密码: <input type="text" name="password" value="123"><br/>
+            <input type="submit" value="@ModelAttributeFun">
+        </form>
+
     </body>
 </html>
