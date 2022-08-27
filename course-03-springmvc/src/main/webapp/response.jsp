@@ -10,14 +10,10 @@
                 $("#btn").click(function () {
                     //发送ajax异步请求
                     $.ajax({
-                        type: "GET",
+                        type: "POST",
                         url: "resp/testAjax",
                         contentType: "application/json;charset=utf-8", //发送数据类型为json
-                        data: {
-                            'uname': '小红',
-                            'password': 'abc',
-                            'age': '23',
-                        },
+                        data: '{"uname": "小红","password": "abc","age": "23"}', //必须json字符串
                         dataType: "json", //预期返回数据类型为json
                         //回调函数
                         success: function (data) {
