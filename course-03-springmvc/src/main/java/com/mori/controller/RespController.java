@@ -3,7 +3,9 @@ package com.mori.controller;
 import com.mori.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -89,5 +91,21 @@ public class RespController {
         //重定向关键字 redirect:
         //外部请求，底层会给在前面加上虚拟路径，外部不能直接访问WEB-INF
         return "redirect:/index.jsp";
+    }
+
+    /**
+     * 响应Ajax异步请求
+     *
+     * @return
+     */
+    //@ResponseBody 将返回对象转成json，需要jackson依赖
+    @RequestMapping("/testAjax")
+    public @ResponseBody
+    User testAjax(@RequestBody User user) {
+        System.out.println(user); //获取整个请求体,底层封装成对象
+        user.setUname("呼呼");
+        user.setPassword("ccc");
+        user.setAge(12);
+        return user; //返还一个对象，底层转换成响应体
     }
 }
