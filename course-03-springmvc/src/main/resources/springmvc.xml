@@ -51,4 +51,23 @@
         <property name="maxUploadSize" value="10485760"/>
     </bean>
 
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--要拦截的方法-->
+            <!-- /intc/** 表示 /intc 请求的所有方法都拦截，/** 表示所有方法都拦截-->
+            <mvc:mapping path="/intc/**"/>
+            <!--不拦截的方法-->
+            <!--<mvc:exclude-mapping path=""/>-->
+            <!--配置拦截器对象-->
+            <bean class="com.mori.interceptor.MyInterceptor"></bean>
+        </mvc:interceptor>
+
+        <!--配第二个拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/intc/**"/>
+            <bean class="com.mori.interceptor.MyInterceptor2"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>

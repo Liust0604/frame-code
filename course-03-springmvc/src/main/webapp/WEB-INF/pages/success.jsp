@@ -15,5 +15,7 @@
         ${user.uname}<br/>
         ${user.age}
 
+
+        <% System.out.println("success.jsp!"); %>
     </body>
 </html>
