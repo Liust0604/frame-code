@@ -7,12 +7,14 @@ import java.io.Serializable;
  */
 public class User implements Serializable {
     private String uname;
+    private String password;
     private Integer age;
 
     @Override
     public String toString() {
         return "User{" +
                 "uname='" + uname + '\'' +
+                ", password='" + password + '\'' +
                 ", age=" + age +
                 '}';
     }
@@ -23,6 +25,14 @@ public class User implements Serializable {
 
     public void setUname(String uname) {
         this.uname = uname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Integer getAge() {
