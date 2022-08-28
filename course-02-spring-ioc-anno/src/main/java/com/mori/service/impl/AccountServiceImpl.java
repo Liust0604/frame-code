@@ -1,19 +1,11 @@
 package com.mori.service.impl;
 
 
-import com.mori.dao.AccountDao;
-import com.mori.dao.impl.AccountDaoImpl;
+import com.mori.mapper.AccountDao;
 import com.mori.domain.Account;
 import com.mori.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;

@@ -1,4 +1,4 @@
-package com.mori.dao.impl;
+package com.mori.mapper.impl;
 
 /**
  * 此类用于抽取Dao中的重复代码

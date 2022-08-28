@@ -1,6 +1,5 @@
 package com.mori.factory;
 
-import com.mori.dao.impl.AccountDaoImpl;
 import com.mori.service.impl.AccountServiceImpl;
 
 /**

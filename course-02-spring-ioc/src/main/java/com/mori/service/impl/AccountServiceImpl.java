@@ -1,12 +1,9 @@
 package com.mori.service.impl;
 
 
-import com.mori.dao.AccountDao;
-import com.mori.dao.impl.AccountDaoImpl;
+import com.mori.mapper.AccountDao;
 import com.mori.domain.Account;
 import com.mori.service.AccountService;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.*;
 

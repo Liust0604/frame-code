@@ -1,6 +1,6 @@
 package com.mori.service.impl;
 
-import com.mori.dao.AccountDao;
+import com.mori.mapper.AccountDao;
 import com.mori.domain.Account;
 import com.mori.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;

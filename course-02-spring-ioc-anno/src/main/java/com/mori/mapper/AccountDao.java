@@ -1,4 +1,4 @@
-package com.mori.dao;
+package com.mori.mapper;
 
 import com.mori.domain.Account;
 

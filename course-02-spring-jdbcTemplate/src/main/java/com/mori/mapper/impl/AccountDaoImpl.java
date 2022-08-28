@@ -1,6 +1,6 @@
-package com.mori.dao.impl;
+package com.mori.mapper.impl;
 
-import com.mori.dao.AccountDao;
+import com.mori.mapper.AccountDao;
 import com.mori.domain.Account;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;

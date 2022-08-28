@@ -10,7 +10,7 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="accountDao" class="com.mori.dao.impl.AccountDaoImpl">
+    <bean id="accountDao" class="com.mori.mapper.impl.AccountDaoImpl">
         <!--注入jdbcTemplate-->
         <!-- <property name="jdbcTemplate" ref="jdbcTemplate"></property>-->
         <!--注入dataSource-->

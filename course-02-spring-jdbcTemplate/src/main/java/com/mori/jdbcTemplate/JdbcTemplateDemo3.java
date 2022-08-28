@@ -1,12 +1,12 @@
 package com.mori.jdbcTemplate;
 
-import com.mori.dao.AccountDao;
+import com.mori.mapper.AccountDao;
 import com.mori.domain.Account;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * dao 操作
+ * mapper 操作
  */
 public class JdbcTemplateDemo3 {
 

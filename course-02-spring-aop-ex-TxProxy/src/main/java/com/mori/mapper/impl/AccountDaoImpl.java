@@ -1,7 +1,7 @@
-package com.mori.dao.impl;
+package com.mori.mapper.impl;
 
 
-import com.mori.dao.AccountDao;
+import com.mori.mapper.AccountDao;
 import com.mori.domain.Account;
 import com.mori.utils.ConnectionUtils;
 import org.apache.commons.dbutils.QueryRunner;

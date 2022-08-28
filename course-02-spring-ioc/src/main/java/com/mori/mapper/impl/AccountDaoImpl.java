@@ -1,13 +1,12 @@
-package com.mori.dao.impl;
+package com.mori.mapper.impl;
 
 
-import com.mori.dao.AccountDao;
+import com.mori.mapper.AccountDao;
 import com.mori.domain.Account;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
