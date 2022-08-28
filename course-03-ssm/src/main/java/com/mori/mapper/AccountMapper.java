@@ -3,9 +3,11 @@ package com.mori.mapper;
 import com.mori.domain.Account;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface AccountMapper {
     /**
      * 查询所有账户信息
