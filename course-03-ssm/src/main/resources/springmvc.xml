@@ -16,6 +16,8 @@
         <!-- 只开启controller注解扫描，别的不扫描 -->
         <context:include-filter type="annotation"
                                 expression="org.springframework.stereotype.Controller"/>
+        <!-- 扫描业务组件,让spring不扫描带有@Service注解的类,防止事务失效 -->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
     </context:component-scan>
 
     <!--视图解析器-->

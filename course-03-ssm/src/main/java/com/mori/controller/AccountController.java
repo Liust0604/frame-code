@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -25,8 +28,10 @@ public class AccountController {
     }
 
     @RequestMapping("/saveAccount")
-    public String saveAccount(Account account) {
+    public void saveAccount(HttpServletRequest request, HttpServletResponse response, Account account) throws IOException {
         System.err.println("控制层：保存账户…");
-        return "success";
+        accountService.saveAccount(account);
+        response.sendRedirect(request.getContextPath() + "/account/findAll");
+        return;
     }
 }

@@ -24,5 +24,6 @@ public class AccountServiceImpl implements AccountService {
     public void saveAccount(Account account) {
         System.err.println("业务层：保存账户…");
         accountMapper.saveAccount(account);
+        //int a = 10 / 0;
     }
 }
