@@ -1,6 +1,8 @@
 package com.mori.mapper;
 
 import com.mori.domain.Account;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -10,12 +12,14 @@ public interface AccountMapper {
      *
      * @return
      */
-    public List<Account> findAll();
+    @Select("select * from ssm.account")
+    List<Account> findAll();
 
     /**
      * 保存账户信息
      *
      * @param account
      */
-    public void saveAccount(Account account);
+    @Insert("insert into ssm.account(name,money) values (#{name},#{money})")
+    void saveAccount(Account account);
 }
