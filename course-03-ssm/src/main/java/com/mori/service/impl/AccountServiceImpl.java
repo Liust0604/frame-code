@@ -2,9 +2,11 @@ package com.mori.service.impl;
 
 import com.mori.domain.Account;
 import com.mori.service.AccountService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service("accountService")
 public class AccountServiceImpl implements AccountService {
 
     @Override
