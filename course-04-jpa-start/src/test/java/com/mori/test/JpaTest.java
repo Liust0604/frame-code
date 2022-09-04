@@ -54,4 +54,80 @@ public class JpaTest {
         //公共工厂，不关闭
         //factory.close();
     }
+
+    /**
+     * 根据id查询客户
+     */
+    @Test
+    public void testFind() {
+        EntityManager em = JpaUtils.getEntityManager();
+
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        //find()，根据id查数据
+        //参数：class 查询结果封装的实体类字节码；id 主键值
+        //对象本身、立即加载
+        Customer customer = em.find(Customer.class, 2L);
+        System.err.println(customer);
+        tx.commit();
+
+        em.close();
+    }
+
+    /**
+     * 根据id查询客户
+     */
+    @Test
+    public void testReference() {
+        EntityManager em = JpaUtils.getEntityManager();
+
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        //代理对象、延迟加载
+        Customer customer = em.getReference(Customer.class, 2L);
+        System.err.println(customer);
+        tx.commit();
+
+        em.close();
+    }
+
+    /**
+     * 删除
+     */
+    @Test
+    public void testRemove() {
+        EntityManager em = JpaUtils.getEntityManager();
+
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        //根据id查询客户
+        Customer customer = em.find(Customer.class, 2L);
+        //删除
+        em.remove(customer);
+        tx.commit();
+
+        em.close();
+    }
+
+    /**
+     * 更新
+     */
+    @Test
+    public void testMerge() {
+        EntityManager em = JpaUtils.getEntityManager();
+
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        Customer customer = new Customer();
+        customer.setCustId(1L);
+        customer.setCustName("小非");
+        customer.setCustIndustry("服务业");
+        //修改
+        em.merge(customer);
+        tx.commit();
+
+        em.close();
+    }
+
+
 }
