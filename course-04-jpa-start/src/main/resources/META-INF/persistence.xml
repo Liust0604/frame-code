@@ -21,7 +21,7 @@
                 update:程序运行时创建表（若有表，不会创建表）
                 none:不会创建表
             -->
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
     </persistence-unit>
 </persistence>
