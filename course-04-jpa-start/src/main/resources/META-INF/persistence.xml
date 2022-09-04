@@ -16,6 +16,7 @@
             <!--jpa实现方的配置（可选），若hibernate是jpa的实现方式，这里就是hibernate的配置-->
             <!--显示SQL false|true-->
             <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
             <!--自动创建数据库表
                 create:程序运行时创建表（若有表，先删除再创建）
                 update:程序运行时创建表（若有表，不会创建表）
