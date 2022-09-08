@@ -34,7 +34,7 @@ public class LinkMan {
 
     //（多对一关系）从表包含一个主表的对象
     @ManyToOne(targetEntity = Customer.class) //配置多对一关系 (targetEntity = 对方的字节码)
-    @JoinColumn(name = "lkm_cust_id", referencedColumnName = "cust_id")
+    @JoinColumn(name = "lkm_cust_id", referencedColumnName = "cust_id") //配置外键
     //(name = "外键名", referencedColumnName = "参照主表的字段名")
     private Customer customer;
 
