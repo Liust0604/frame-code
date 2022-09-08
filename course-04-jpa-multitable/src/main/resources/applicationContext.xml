@@ -50,6 +50,16 @@
         <property name="jpaDialect">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
         </property>
+
+        <!--注入jpa配置信息
+            加载jpa基本配置信息和jpa的实现方式（hibernate）的配置信息
+        -->
+        <property name="jpaProperties">
+            <props>
+                <!--上面hibernate配置了generateDdl=false，不自动创建数据库表，这里可以再通过jpa配置用什么方式创建表-->
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
     </bean>
 
     <!--2、配置JPA事务管理器-->

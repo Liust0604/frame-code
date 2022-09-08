@@ -9,28 +9,34 @@ public class LinkMan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "lkm_id")
-    Long lkmId; //联系人编号
+    private Long lkmId; //联系人编号
 
     @Column(name = "lkm_name")
-    String lkmName; //联系人姓名
+    private String lkmName; //联系人姓名
 
     @Column(name = "lkm_gender") //联系人性别
-    String lkmGender;
+    private String lkmGender;
 
     @Column(name = "lkm_phone") //联系人办公电话
-    String lkmPhone;
+    private String lkmPhone;
 
     @Column(name = "lkm_mobile") //联系人手机
-    String lkmMobile;
+    private String lkmMobile;
 
     @Column(name = "lkm_email") //联系人邮箱
-    String lkmEmail;
+    private String lkmEmail;
 
     @Column(name = "lkm_position") //联系人职位
-    String lkmPosition;
+    private String lkmPosition;
 
     @Column(name = "lkm_memo") //联系人备注
-    String lkmMemo;
+    private String lkmMemo;
+
+    //（多对一关系）从表包含一个主表的对象
+    @ManyToOne(targetEntity = Customer.class) //配置多对一关系 (targetEntity = 对方的字节码)
+    @JoinColumn(name = "lkm_cust_id", referencedColumnName = "cust_id")
+    //(name = "外键名", referencedColumnName = "参照主表的字段名")
+    private Customer customer;
 
     @Override
     public String toString() {
@@ -43,6 +49,7 @@ public class LinkMan {
                 ", lkmEmail='" + lkmEmail + '\'' +
                 ", lkmPosition='" + lkmPosition + '\'' +
                 ", lkmMemo='" + lkmMemo + '\'' +
+                ", customer=" + customer +
                 '}';
     }
 
@@ -108,5 +115,13 @@ public class LinkMan {
 
     public void setLkmMemo(String lkmMemo) {
         this.lkmMemo = lkmMemo;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

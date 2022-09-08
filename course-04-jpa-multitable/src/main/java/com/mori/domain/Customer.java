@@ -1,6 +1,8 @@
 package com.mori.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 客户实现类
@@ -32,6 +34,17 @@ public class Customer {
     @Column(name = "cust_phone")
     private String custPhone; //客户电话
 
+    //（一对多关系）主表包含一个从表的集合（推荐用set）
+    //@OneToMany(targetEntity = LinkMan.class) //配置一对多关系 (targetEntity = 对方的字节码)
+    //@JoinColumn(name = "lkm_cust_id", referencedColumnName = "cust_id") //配置外键（name = 外键字段名,referencedColumnName = 参照主表的主键名）
+    //上方配置，会使得主表拥有主键维护权利，会多发update语句。
+    // 应当主表放弃主键维护权，只用声明关系即可
+    //放弃主键维护权(mappedBy = 被外键关联的对象)
+    //只有linkMan中@JoinColumn单方面配置了外键的指向，对应的属性名为customer，和当前Customer的mappedBy = "customer"形成映射关系
+    //级联操作的主体需要加上cascade属性
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private Set<LinkMan> linkMans = new HashSet<>();
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -42,6 +55,7 @@ public class Customer {
                 ", custLevel='" + custLevel + '\'' +
                 ", custAddress='" + custAddress + '\'' +
                 ", custPhone='" + custPhone + '\'' +
+                ", linkMans=" + linkMans +
                 '}';
     }
 
@@ -99,5 +113,13 @@ public class Customer {
 
     public void setCustPhone(String custPhone) {
         this.custPhone = custPhone;
+    }
+
+    public Set<LinkMan> getLinkMans() {
+        return linkMans;
+    }
+
+    public void setLinkMans(Set<LinkMan> linkMans) {
+        this.linkMans = linkMans;
     }
 }
