@@ -1,0 +1,35 @@
+#普通数据 key:[空格]value,这个空格无论yml哪里键值赋值都要有
+name: zhangsan
+
+#对象(Map)配置 第二层前有空格
+person:
+  name: zhangshan
+  age: 18
+  address: beijing
+
+server:
+  port: 8082
+
+# 对象配置(行内)
+student: {name: zhangsan,age: 18,addr: beijing}
+
+# 数组（List、Set）配置 （普通字符串）
+city:
+  - beijing
+  - tianjin
+  - chongqing
+
+# 数组配置(行内)
+chengshi: [beijing,tianjin,chongqing]
+
+# 数组配置 （对象数据）
+stu:
+  - name: tom
+    age: 12
+    addr: beijing
+  - name: lucy
+    age: 17
+    addr: shanghai
+
+# 数组配置(行内) （对象数据）
+stu2: [{name: tom,age: 12},{name: lucy,age: 17}]
