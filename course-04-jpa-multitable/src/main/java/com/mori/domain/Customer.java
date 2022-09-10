@@ -42,7 +42,7 @@ public class Customer {
     //放弃主键维护权(mappedBy = 被外键关联的对象)
     //只有linkMan中@JoinColumn单方面配置了外键的指向，对应的属性名为customer，和当前Customer的mappedBy = "customer"形成映射关系
     //级联操作的主体需要加上cascade属性
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL,fetch = FetchType.EAGER) // fetch 配置关联对象的加载方式
     private Set<LinkMan> linkMans = new HashSet<>();
 
     @Override

@@ -49,7 +49,6 @@ public class LinkMan {
                 ", lkmEmail='" + lkmEmail + '\'' +
                 ", lkmPosition='" + lkmPosition + '\'' +
                 ", lkmMemo='" + lkmMemo + '\'' +
-                ", customer=" + customer +
                 '}';
     }
 
