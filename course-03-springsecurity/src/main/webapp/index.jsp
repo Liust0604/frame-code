@@ -1,5 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<body>
-<h2>Hello World!</h2>
-</body>
+    <head>
+        <title>Spring Security</title>
+    </head>
+    <body>
+        <h1>Hello World！</h1>
+    </body>
 </html>
