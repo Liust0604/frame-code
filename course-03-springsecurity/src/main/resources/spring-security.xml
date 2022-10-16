@@ -3,26 +3,36 @@
        xmlns:security="http://www.springframework.org/schema/security"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/security
-       http://www.springframework.org/schema/security/spring-security.xsd">
+          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/security
+          http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+    <!-- 配置不过滤的资源（静态资源及登录相关），该资源不进行权限控制，所有用户都可访问 -->
+    <security:http security="none" pattern="/login.html"/>
+    <security:http security="none" pattern="/failer.html"/>
 
     <security:http auto-config="true" use-expressions="false">
-        <!-- intercept-url定义一个过滤规则 pattern表示对哪些url进行权限控制，ccess属性表示在请求对应
-的URL时需要什么权限， 默认配置时它应该是一个以逗号分隔的角色列表，请求的用户只需拥有其中的一个角色就能成功访问对应
-的URL -->
-        <!--/**所有的资源都会被拦截，必须拥有ROLE_USER权限才能被访问 -->
+        <!-- 配置资料连接，表示任意路径都需要ROLE_USER权限 -->
         <security:intercept-url pattern="/**" access="ROLE_USER"/>
-        <!-- auto-config配置后，不需要在配置下面信息
-            <security:form-login /> 定义登录表单信息
-            <security:http-basic />
-            <security:logout /> -->
+        <!-- login-page 自定义登陆页面。 登录页面是/login.html，login-processing-url，表单通过login访问权限服务
+             default-target-url 登陆成功后跳转的页面。（登录成功且认证）
+             authentication-success-forward-url 登录成功的页面再请求转发到指定位置 （登录成功即可）（比如登录成功但未认证会跳转到403，再次发送请求到success.html，这样不管是否认证，只要登录成功即可跳转到成功页面）
+             authentication-failure-url 登录失败后会跳转到这个页面。（登录失败，即该用户不存在）
+            注：登陆页面用户名固定 username，密码 password，action:login -->
+        <security:form-login login-page="/login.html" login-processing-url="/authentication/login"
+                             username-parameter="username" password-parameter="password"
+                             default-target-url="/success.html"
+                             authentication-success-forward-url="/success.html"
+                             authentication-failure-url="/failer.html"
+        />
+        <!-- 关闭CSRF,默认是开启的。即关闭跨服务器的请求访问 -->
+        <security:csrf disabled="true"/>
     </security:http>
 
     <security:authentication-manager>
         <security:authentication-provider>
             <security:user-service>
-                <!--配置用户对应的权限-->
                 <security:user name="user" password="{noop}user"
                                authorities="ROLE_USER"/>
                 <security:user name="admin" password="{noop}admin"
